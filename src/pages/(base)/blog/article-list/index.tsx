@@ -9,6 +9,7 @@ import {
   fetchDeleteArticleById,
   fetchQueryArticleListByConditionPage,
   fetchSaveArticle,
+  fetchSaveDraftArticle,
   fetchUpdateArticle
 } from '@/service/api';
 
@@ -220,12 +221,21 @@ export default function ArticleList() {
       // 操作结果标识
       let isSuccess = true;
       try {
-        // 根据操作类型调用不同的 mutation
         if (type === 'add') {
-          // 利用 React Query 的 mutateAsync 执行请求
-          await fetchSaveArticle(articleData);
+          // 新增文章
+          if (articleData.publishState === false) {
+            // 保存为草稿
+            await fetchSaveDraftArticle(articleData);
+          } else {
+            await fetchSaveArticle(articleData);
+          }
         } else {
-          await fetchUpdateArticle(articleData);
+          if (articleData.publishState === false) {
+            // 更新为草稿
+            await fetchSaveDraftArticle(articleData);
+          } else {
+            await fetchUpdateArticle(articleData);
+          }
         }
       } catch (error) {
         // 全局拦截器已处理错误提示，此处无需重复提示

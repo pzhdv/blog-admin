@@ -71,6 +71,12 @@ export default defineConfig(configEnv => {
             axios: ['axios'],
             // 国际化：i18n 多语言核心依赖
             il8n: ['react-i18next', 'i18next'],
+            //  markdown 编辑器
+            markdownEditor: ['react-markdown-editor-lite', 'markdown-it', 'highlight.js'],
+            // Markdown 渲染
+            markdownRender: ['react-markdown', 'rehype-sanitize', 'remark-gfm', 'rehype-external-links'],
+            // Markdown 渲染语法高亮
+            markdownSyntax: ['react-syntax-highlighter', 'refractor'],
             // React 核心全家桶：框架本体 + DOM 渲染 + 错误边界处理
             react: ['react', 'react-dom', 'react-error-boundary'],
             // 路由库：React 路由核心模块
